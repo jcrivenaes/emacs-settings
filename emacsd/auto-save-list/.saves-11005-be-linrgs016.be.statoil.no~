@@ -1,0 +1,14 @@
+/private/jriv/work/git/pyxtgeo/tests/test_regular_surface_vs_cube.py
+/private/jriv/work/git/pyxtgeo/tests/#test_regular_surface_vs_cube.py#
+/private/jriv/work/git/cxtgeo/clib/src/cube_value_xyz_interp.c
+/private/jriv/work/git/cxtgeo/clib/src/#cube_value_xyz_interp.c#
+/private/jriv/work/git/cxtgeo/clib/src/x_interp_cube_nodes.c
+/private/jriv/work/git/cxtgeo/clib/src/#x_interp_cube_nodes.c#
+/private/jriv/work/git/cxtgeo/clib/src/cube_ijk_from_xyz.c
+/private/jriv/work/git/cxtgeo/clib/src/#cube_ijk_from_xyz.c#
+/private/jriv/work/git/cxtgeo/clib/src/surf_slice_cube.c
+/private/jriv/work/git/cxtgeo/clib/src/#surf_slice_cube.c#
+/private/jriv/work/git/pyxtgeo/xtgeo/surface/regular_surface.py
+/private/jriv/work/git/pyxtgeo/xtgeo/surface/#regular_surface.py#
+/private/jriv/work/git/pyxtgeo/xtgeo/cube/cube.py
+/private/jriv/work/git/pyxtgeo/xtgeo/cube/#cube.py#
