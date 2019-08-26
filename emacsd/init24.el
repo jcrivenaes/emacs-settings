@@ -24,6 +24,8 @@
  '(custom-safe-themes
    (quote
     ("1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "28ec8ccf6190f6a73812df9bc91df54ce1d6132f18b4c8fcc85d45298569eb53" "2e1e2657303116350fe764484e8300ca2e4cf45a73cdbd879bc0ca29cb337147" "8c4acde8417375abc15f41f56d1ddad62e13a4bd886d381ea1a1d4620c932933" "392f19e7788de27faf128a6f56325123c47205f477da227baf6a6a918f73b5dc" default)))
+ '(elpy-rpc-python-command "python")
+ '(elpy-rpc-timeout 2)
  '(elpy-syntax-check-command "flake8")
  '(elpy-test-discover-runner-command (quote ("pytest" "" "")))
  '(elpy-test-pytest-runner-command (quote ("py.test")))
@@ -127,15 +129,26 @@
 
 (package-initialize)
 (elpy-enable)
-(setq elpy-rpc-backend "jedi")
+(setq elpy-rpc-backend "rope")
 ;; Fixing a key binding bug in elpy
 (define-key yas-minor-mode-map (kbd "C-c k") 'yas-expand)
 ;; Fixing another key binding bug in iedit mode
 (define-key global-map (kbd "C-c o") 'iedit-mode)
-(when (require 'flycheck nil t)
+;; (when (require 'flycheck nil t)
+;;   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+;;   (add-hook 'elpy-mode-hook 'flycheck-mode))
+(when (load "flycheck" t t)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (add-hook 'elpy-mode-hook 'flycheck-mode))
 
+;; added april 02, 2019
+;;(defun flycheck-python-setup ()
+;;  (flycheck-mode))
+;;(add-hook 'python-mode-hook #'flycheck-python-setup)
+
+;;(global-flycheck-mode 0)
+;;(with-eval-after-load 'flycheck
+;;  (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
 ;; ===================================STUFF====================================
 
 (defun rst-python-statement-is-docstring (begin)
@@ -184,7 +197,7 @@
 (add-hook 'ipl-mode-hook 'column-enforce-mode)
 ;; (global-column-enforce-mode t)
 
-(setq column-enforce-column 79)
+(setq column-enforce-column 88)
 ;;(setq column-enforce-comments nil)
 
 ;;(require 'fill-column-indicator)
@@ -202,6 +215,14 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight bold :height 173 :width normal)))))
+
+(require 'flycheck-yamllint)
+(eval-after-load 'flycheck
+  '(add-hook 'flycheck-mode-hook 'flycheck-yamllint-setup))
+
+(autoload 'pylint "pylint")
+(add-hook 'python-mode-hook 'pylint-add-menu-items)
+(add-hook 'python-mode-hook 'pylint-add-key-bindings)
 
 ;; ================================F key settings =============================
 
@@ -221,7 +242,9 @@
 
 (global-set-key '[(f8)]          'undo)
 
-(global-set-key '[(f9)]          'minimap-mode)
+(global-set-key '[(f9)]          'elpy-black-fix-code)
+(global-set-key '[(ctrl f9)]     'pylint)
+(global-set-key '[(shift f9)]    'minimap-mode)
 (global-set-key '[(f10)]         'column-enforce-mode)
 (global-set-key '[(f11)]         'theme-looper-enable-next-theme)
 (global-set-key '[(f12)]         'default-text-scale-increase)

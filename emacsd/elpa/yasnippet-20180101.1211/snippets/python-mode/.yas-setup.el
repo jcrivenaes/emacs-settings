@@ -1,1 +1,0 @@
-../../../../snippets/python-mode/.yas-setup.el
