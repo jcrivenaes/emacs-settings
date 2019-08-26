@@ -1,9 +1,10 @@
 ;; PROXY
-(setq url-proxy-services
-      '(("no_proxy" . "^\\(localhost\\|10.*\\)")
-	("http" . "www-proxy.statoil.no:80")
-	("https" . "www-proxy.statoil.no:80")))
 
+(when (string= (getenv "USER") "jriv")
+  (setq url-proxy-services
+        '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+          ("http" . "www-proxy.statoil.no:80")
+          ("https" . "www-proxy.statoil.no:80"))))
 
 ;; ===================================MELPA===================================
 (require 'package)
@@ -61,9 +62,11 @@
 ;; some settings
 (setq load-prefer-newer t)
 
-;; use one of these:
-(load "/project/res/etc/emacs-modes/statoil-modes")
-;;(load "/private/jriv/work/svn/emacs-modes/statoil-modes-test")
+(when (string= (getenv "USER") "jriv")
+  ;; use one of these:
+  (load "/project/res/etc/emacs-modes/statoil-modes")
+  ;;(load "/private/jriv/work/svn/emacs-modes/statoil-modes-test")
+)
 
 (add-to-list 'load-path "~/.emacs.d/aux")
 
